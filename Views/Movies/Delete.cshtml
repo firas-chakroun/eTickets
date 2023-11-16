@@ -1,0 +1,57 @@
+﻿@model eTickets.Models.Movie
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="delete-movie-card">
+    <div class="delete-movie-card-content">
+        <div class="delete-movie-card-title">
+            <h2>Delete @Model.Name</h2>
+            <div class="delete-movie-underline-title"></div>
+        </div>
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-content" readonly />
+                <span asp-validation-for="Name" class="text-danger"></span>
+        <div class="form-border"></div>
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-content" readonly />
+                <span asp-validation-for="Description" class="text-danger"></span>
+        <div class="form-border"></div>
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-content" readonly />
+                <span asp-validation-for="Price" class="text-danger"></span>
+        <div class="form-border"></div>
+
+        
+            <label asp-for="StartDate" class="form-label">Status</label>
+            
+                @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
+                {
+            <span asp-validation-for="StartDate" class="form-content badge bg-success text-white" style="font-size: 16px;">AVAILABLE</span>
+                }
+                else if (DateTime.Now > Model.EndDate)
+                {
+            <span asp-validation-for="StartDate" class="form-content badge bg-danger text-white" style="font-size: 16px;">EXPIRED</span>
+                }
+                else
+                {
+            <span asp-validation-for="StartDate" class="form-content badge bg-primary text-white" style="font-size: 16px;">UPCOMING</span>
+                }
+            
+        
+        
+        <label asp-for="MovieCategory" class="form-label"></label>
+        <input asp-for="MovieCategory" class="form-content" readonly />
+        <span asp-validation-for="MovieCategory" class="text-danger"></span>
+        <div class="form-border"></div>
+
+        <div class="delete-movie-btns">
+            <form asp-action="Delete" class="delete-form">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Confirm" class="btn delete-movie-btn my-2" />
+                <a class="btn movie-show-all-btn my-2" asp-action="Index">Show All</a>
+            </form>
+        </div>
+    </div>
+</div>
